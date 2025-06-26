@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Alumnos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        body {
+            background-color: white;
+        }
+
+        .container {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <a class="navbar-brand" href="/">Intranet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/inicio.html">Inicio</a></li>
+                <li class="nav-item active"><a class="nav-link" href="views/alumnos.html">Alumnos</a></li>
+                <li class="nav-item"><a class="nav-link" href="views/asignaturas.html">Asignaturas</a></li>
+                <li class="nav-item"><a class="nav-link" href="views/profesores.html">Profesores</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="app" class="container">
+        <h1 class="mb-4">Listado de Alumnos</h1>
+
+        <form @submit.prevent="agregarAlumno">
+            <div class="form-row">
+                <div class="col-md-4 mb-2">
+                    <input v-model="nuevoAlumno.rut" type="text" class="form-control" placeholder="RUT Alumno" />
+                    <span v-if="errors.rut">{{ errors.rut }}adsdasd</span>
+                    </span>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <input v-model="nuevoAlumno.nombre" type="text" class="form-control"
+                        placeholder="Nombre del Alumno" />
+                </div>
+                <div class="col-md-2 mb-2">
+                    <input v-model.number="nuevoAlumno.edad" type="number" min="0" class="form-control"
+                        placeholder="Edad" />
+                </div>
+                <!-- <div class="col-md-4 mb-2">
+                    <select v-model="nuevoLibro.categoria" class="form-control" required>
+                        <option disabled value="">Seleccione categoría</option>
+                        <option v-for="(categoria, i) in categorias" :key="i">{{ categoria }}</option>
+                    </select>
+                </div> -->
+                <!-- <div class="col-md-4 mb-2">
+                    <input v-model="nuevoLibro.autor" type="text" class="form-control" placeholder="Nombre del Autor"
+                         />
+                </div> -->
+
+                <!-- <div class="col-md-4 mb-2">
+                    <input v-model="nuevoLibro.editorial" type="text" class="form-control"
+                        placeholder="Nombre Editorial" required />
+                </div> -->
+                <div class="col-md-2 mb-2">
+                    <button type="submit" class="btn btn-success btn-block">Agregar</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Tabla de libros -->
+        <table class="table table-bordered table-hover mt-4">
+            <thead class="thead-light">
+                <tr>
+                    <th>RUT</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Correo</th>
+                    <th>Asignatura</th>
+                    <th>Profesor</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(alumno, indice) in alumnos" :key="indice">
+                    <td>{{ alumno.RUT }}</td>
+                    <td>{{ alumno.nombre }}</td>
+                    <td>{{ alumno.edad }}</td>
+                    <td>{{ alumno.correo }}</td>
+                    <td>{{ alumno.asignatura }}</td>
+                    <td>{{ alumno.profesor }}</td>
+                    <td class="spacer"><button @click="eliminarLibro(indice)"
+                            class="btn btn-danger btn-sm">Eliminar</button>
+                        <button @click="editarLibro(indice)" class="btn btn-warning btn-sm">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/index.js"></script>
+</body>
+<style>
+    .spacer {
+        display: flex;
+        gap: 0.5rem;
+        width: fit-content;
+    }
+</style>
+
+</html>
