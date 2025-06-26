@@ -13,13 +13,14 @@ createApp({
 
             // let errors = {}
 
+            if (nuevoAlumno.rut.length < 1 || nuevoAlumno.rut.split("-").length != 2 || !["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "k", "K"].nuevoAlumno.rut.split("-")[1]) {
+                errors.rut = 'El RUT es obligatorio y debe tener un formato válido (123456789-0).';
+            }
+
             if (nuevoAlumno.nombre === '' && nuevoAlumno.nombre.lenght == 0) {
                 errors.nombre = 'El nombre es obligatorio.';
             }
 
-            if (nuevoAlumno.rut === '' && nuevoAlumno.rut.split("-").length != 2 && !["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "k", "K"].nuevoAlumno.rut.split("-")[1]) {
-                errors.rut = 'El RUT es obligatorio y debe tener un formato válido (123456789-0).';
-            }
 
             if (nuevoAlumno.edad === '' || isNaN(nuevoAlumno.edad) || nuevoAlumno.edad < 0) {
                 errors.edad = 'La edad es obligatoria y debe ser un número positivo.';

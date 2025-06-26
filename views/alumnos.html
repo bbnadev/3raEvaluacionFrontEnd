@@ -41,9 +41,8 @@
             <div class="form-row">
                 <div class="col-md-4 mb-2">
                     <input v-model="nuevoAlumno.rut" type="text" class="form-control" placeholder="RUT Alumno" />
-                    <span v-if="errors.rut">{{ errors.rut }}adsdasd</span>
-                    </span>
                 </div>
+                <i v-if="errors.rut">{{ errors.rut }}adsdasd</i>
                 <div class="col-md-4 mb-2">
                     <input v-model="nuevoAlumno.nombre" type="text" class="form-control"
                         placeholder="Nombre del Alumno" />
