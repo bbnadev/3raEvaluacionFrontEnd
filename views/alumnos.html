@@ -28,51 +28,59 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="/inicio.html">Inicio</a></li>
-                <li class="nav-item active"><a class="nav-link" href="views/alumnos.html">Alumnos</a></li>
-                <li class="nav-item"><a class="nav-link" href="views/asignaturas.html">Asignaturas</a></li>
-                <li class="nav-item"><a class="nav-link" href="views/profesores.html">Profesores</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/views/alumnos.html">Alumnos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/views/asignaturas.html">Asignaturas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/views/profesores.html">Profesores</a></li>
             </ul>
         </div>
     </nav>
+
     <div id="app" class="container">
         <h1 class="mb-4">Listado de Alumnos</h1>
-
         <form @submit.prevent="agregarAlumno">
             <div class="form-row">
                 <div class="col-md-4 mb-2">
-                    <input v-model="nuevoAlumno.rut" type="text" class="form-control" placeholder="RUT Alumno" />
+                    <input v-model="nuevoAlumno.rut" type="text" name="rut" placeholder="RUT Alumno"
+                        class="form-control" />
+                    <i v-if="errors.rut" class="errors">{{ errors.rut }}</i>
                 </div>
-                <i v-if="errors.rut">{{ errors.rut }}adsdasd</i>
                 <div class="col-md-4 mb-2">
-                    <input v-model="nuevoAlumno.nombre" type="text" class="form-control"
+                    <input v-model="nuevoAlumno.nombre" type="text" name="nombre" class="form-control"
                         placeholder="Nombre del Alumno" />
+                    <i v-if="errors.nombre" class="errors">{{ errors.nombre }}</i>
                 </div>
-                <div class="col-md-2 mb-2">
-                    <input v-model.number="nuevoAlumno.edad" type="number" min="0" class="form-control"
-                        placeholder="Edad" />
-                </div>
-                <!-- <div class="col-md-4 mb-2">
-                    <select v-model="nuevoLibro.categoria" class="form-control" required>
-                        <option disabled value="">Seleccione categoría</option>
-                        <option v-for="(categoria, i) in categorias" :key="i">{{ categoria }}</option>
-                    </select>
-                </div> -->
-                <!-- <div class="col-md-4 mb-2">
-                    <input v-model="nuevoLibro.autor" type="text" class="form-control" placeholder="Nombre del Autor"
-                         />
-                </div> -->
 
-                <!-- <div class="col-md-4 mb-2">
-                    <input v-model="nuevoLibro.editorial" type="text" class="form-control"
-                        placeholder="Nombre Editorial" required />
-                </div> -->
+                <div class="col-md-4 mb-2">
+                    <input v-model="nuevoAlumno.correo" type="email" name="correo" class="form-control"
+                        placeholder="Correo Electrónico" />
+                    <i v-if="errors.correo" class="errors">{{ errors.correo }}</i>
+                </div>
+
+                <div class="col-md-2 mb-2">
+                    <input v-model.number="nuevoAlumno.edad" type="number" min="0" name="edad" class="form-control"
+                        placeholder="Edad" />
+                    <i v-if="errors.edad" class="errors">{{ errors.edad }}</i>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <select v-model="nuevoAlumno.asignatura" class="form-control">
+                        <option disabled value="">Seleccione asignatura</option>
+                        <option v-for="(asignatura, i) in asignaturas" :key="i">{{ asignatura.nombre }}</option>
+
+                    </select>
+                    <i v-if="errors.asignatura" class="errors">{{ errors.asignatura }}</i>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <select v-model="nuevoAlumno.profesor" class="form-control">
+                        <option disabled value="">Seleccione profesor</option>
+                        <option v-for="(profesor, i) in profesores" :key="i">{{ profesor.nombre }}</option>
+                    </select>
+                    <i v-if="errors.profesor" class="errors">{{ errors.profesor }}</i>
+                </div>
                 <div class="col-md-2 mb-2">
                     <button type="submit" class="btn btn-success btn-block">Agregar</button>
                 </div>
             </div>
         </form>
-
-        <!-- Tabla de libros -->
         <table class="table table-bordered table-hover mt-4">
             <thead class="thead-light">
                 <tr>
@@ -87,15 +95,18 @@
             </thead>
             <tbody>
                 <tr v-for="(alumno, indice) in alumnos" :key="indice">
-                    <td>{{ alumno.RUT }}</td>
+                    <td>{{ alumno.rut }}</td>
                     <td>{{ alumno.nombre }}</td>
                     <td>{{ alumno.edad }}</td>
                     <td>{{ alumno.correo }}</td>
                     <td>{{ alumno.asignatura }}</td>
                     <td>{{ alumno.profesor }}</td>
-                    <td class="spacer"><button @click="eliminarLibro(indice)"
+                    <td class="spacer"><button @click="eliminarAlumno(indice)"
                             class="btn btn-danger btn-sm">Eliminar</button>
-                        <button @click="editarLibro(indice)" class="btn btn-warning btn-sm">Editar</button>
+                        <a class="btn btn-warning text-white btn-sm ml-2"
+                            :href="'/views/editarAlumno.html?id=' + indice">
+                            Editar
+                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -110,6 +121,13 @@
         display: flex;
         gap: 0.5rem;
         width: fit-content;
+    }
+
+
+    .errors {
+        display: block;
+        color: red;
+        font-size: 0.8rem;
     }
 </style>
 

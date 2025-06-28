@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Editar Alumno</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        body {
+            background-color: white;
+        }
+
+        .container {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <a class="navbar-brand" href="#">Intranet</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/inicio.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="/views/alumnos.html">Alumnos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/views/asignaturas.html">Asignaturas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/views/profesores.html">Profesores</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="app">
+        <div class="container">
+            <h1>Editar Alumno</h1>
+            <form @submit.prevent="guardarEdicionAlumno">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="edit-rut">RUT:</label>
+                        <input class="form-control" type="text" id="edit-rut" v-model="AlumnoAEditar.rut" required>
+                    </div>
+                    <div class="col">
+                        <label for="edit-nombre">Nombre:</label>
+                        <input class="form-control" type="text" id="edit-nombre" v-model="AlumnoAEditar.nombre"
+                            required>
+                    </div>
+                    <div class="col">
+                        <label for="edit-correo">Correo:</label>
+                        <input class="form-control" type="email" id="edit-correo" v-model="AlumnoAEditar.correo"
+                            required>
+                    </div>
+                    <div class="col">
+                        <label for="edit-edad">Edad:</label>
+                        <input class="form-control" type="number" id="edit-edad" v-model="AlumnoAEditar.edad" min="0"
+                            required>
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <div class="col">
+                        <label for="edit-asignatura">Asignatura:</label>
+                        <select class="form-control" id="edit-asignatura" v-model="AlumnoAEditar.asignatura" required>
+                            <option v-for="asignatura in asignaturas" :key="asignatura" :value="asignatura.nombre">{{
+                                asignatura.nombre }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="edit-profesor">Profesor:</label>
+                        <select class="form-control" id="edit-profesor" v-model="AlumnoAEditar.profesor" required>
+                            <option v-for="profesor in profesores" :key="profesor" :value="profesor.nombre">{{
+                                profesor.nombre }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button class="float-right mt-3 btn btn-primary" type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/editarAlumnoAPP.js"></script>
+</body>
+
+</html>
